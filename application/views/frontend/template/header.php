@@ -46,7 +46,7 @@
 							<li class="menu-item"><a href="<?= base_url("home/about_us") ?>">About us</a></li>
 							<li class="menu-item"><a href="<?= base_url("home/map") ?>">Map & Weather</a></li>
 							<!-- Link Booking ngenteni alfi -->
-							<li class="menu-item"><a href="<?= base_url("booking") ?>">Booking</a></li>
+							<li class="menu-item"><a href="<?= base_url("booking/tanggal") ?>">Booking</a></li>
 							<li class="menu-item"><a href="<?= base_url("layanan/cek_kode")?>">Cek Kode</a></li>
 						</ul>
 					</nav>
