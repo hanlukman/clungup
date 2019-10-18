@@ -110,6 +110,7 @@
 <script>
 	function show_date() {
 		var str = document.getElementById("mymonth").value;
+		var str_year = document.getElementById("myyear").value;
 		if (str == '') {
 			return;
 		}
@@ -125,7 +126,7 @@
 			}
 		}
 
-		xmlhttp.open("GET", "../index.php/booking/get_tanggal/" + str, true);
+		xmlhttp.open("GET", "../index.php/booking/get_tanggal/" + str+"/"+str_year, true);
 		xmlhttp.send();
 	}
 </script>

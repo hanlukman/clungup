@@ -5,10 +5,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Booking extends CI_Controller
 {
 
-  public function index()
+  public function index($tanggal,$sesi)
   {
     $data["header"] = $this->load->view("frontend/template/header", null, true);
     $data["footer"] = $this->load->view("frontend/template/footer", null, true);
+    
+    $data['data_tanggal'] = $tanggal;
+    $data['data_sesi'] = $sesi;
+
     $this->load->view('frontend/booking', $data);
   }
 
@@ -20,31 +24,58 @@ class Booking extends CI_Controller
 
     $data["header"] = $this->load->view("frontend/template/header", null, true);
     $data["footer"] = $this->load->view("frontend/template/footer", null, true);
+    
     $this->load->view('frontend/tanggal', $data);
   }
 
-  public function get_tanggal($month)
+  public function get_tanggal($month,$year)
   {
     $selectedMonth = $month;
     $bulan = "$selectedMonth";
 
-    $start_date = "01-" . $bulan . "-2019";
+    $start_date = "01-" . $bulan . "-".$year;
     $start_time = strtotime($start_date);
 
     $end_time = strtotime("+1 month", $start_time);
+    //edit at here
     echo "<table class='table table-bordered'>";
     for ($i = $start_time; $i < $end_time; $i += 86400) { 
       $list = date('d M Y (D)', $i);
-      echo "<tr><td>";
-      echo $list;
-      echo "</td>";
+
+      #
+      $quantity_1 = 0;
+      $quantity_2 = 0;
+      $quantity_3 = 0;
+      $data_reservasi_1  = $this->db->select('sum(quantity) as total_sum')->where('sesi','1')->where('booking_date_start',date("Y-m-d",$i))->get('reservation')->row(0);
+      $data_reservasi_2  = $this->db->select('sum(quantity) as total_sum')->where('sesi','2')->where('booking_date_start',date("Y-m-d",$i))->get('reservation')->row(0);
+      $data_reservasi_3  = $this->db->select('sum(quantity) as total_sum')->where('sesi','3')->where('booking_date_start',date("Y-m-d",$i))->get('reservation')->row(0);
+      if($data_reservasi_1 != null){
+        $quantity_1 = 10 - $data_reservasi_1->total_sum;
+       }
+      if($data_reservasi_2 != null){
+        $quantity_2 = 10 - $data_reservasi_2->total_sum;
+       }
+      if($data_reservasi_3 != null){
+        $quantity_3 = 10 - $data_reservasi_3->total_sum;
+       }
+
+      #
+
+      echo "<tr>";
       echo "<td>";
       echo $list;
       echo "</td>";
-
-
-      echo "<td>&nbsp;</td>";
+      echo "<td>";
+      echo '<a href="'.base_url("Booking/index/".$i."/1").'" class="btn btn-primary">'.$quantity_1.'</a>';
+      echo "</td>";
+      echo "<td>";
+      echo '<a href="'.base_url("Booking/index/".$i."/2").'" class="btn btn-primary">'.$quantity_2.'</a>';
+      echo "</td>";
+      echo "<td>";
+      echo '<a href="'.base_url("Booking/index/".$i."/3").'" class="btn btn-primary">'.$quantity_3.'</a>';
+      echo "</td>";
       echo "</tr>";
+
     }
     echo "</table>";
   }

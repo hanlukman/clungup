@@ -59,10 +59,19 @@
 					                    <label for="name">Date End : </label>
 					                    <input type="text" name="dateend" id="contact" class="form-control">					                
 					                </div> -->
+
+
+					                <!-- Garapan anyar -->
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="datestart">Tgl. Masuk</label>
 							<div class="col-sm-10">
-								<input type="date" name="datestart" class="form-control datepicker" id="datestart">
+								<input type="date" name="datestart" class="form-control datepicker" id="datestart" readonly value="<?php echo date("Y-m-d",$data_tanggal) ?>">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="datestart">Sesi</label>
+							<div class="col-sm-10">
+								<input type="text" name="sesi" class="form-control" readonly value="<?php echo $data_sesi ?>">
 							</div>
 						</div>
 						<!-- <div class="form-group">

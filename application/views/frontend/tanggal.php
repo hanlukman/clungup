@@ -20,7 +20,6 @@
 										<div class="form-group row">
 											<label class="col-sm-2 control-label">Month</label>
 											<div class="col-sm-10">
-												<form>
 													<select class="form-control" name="mymonth" id="mymonth"
 														onchange="show_date()">
 														<option value>-</option>
@@ -37,9 +36,14 @@
 														<option value="11">November</option>
 														<option value="12">Desember</option>
 													</select>
-												</form>
 											</div>
-										</div>
+												</div>
+										<div class="form-group row">
+											<label class="col-sm-2 control-label">Month</label>
+											<div class="col-sm-10">
+														<input type="number" id="myyear" class="form-control" value="<?php echo date("Y") ?>" onchange="show_date()">
+											</div>
+												</div>
 									</div>
 									<!-- year -->
 									<!-- <div class="box-body">
@@ -62,22 +66,18 @@
 						</div>
 						<!-- end month + year -->
 						<!-- start list day -->
-						<div id="txtHint"></div>
-						<!-- <table class="table table-bordered">
+						<table class="table table-bordered">
 							<thead>
 								<tr>
 									<th scope="col">Date</th>
 									<th scope="col">Session</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>Mark</td>
-								</tr>
-							</tbody>
-						</table> -->
+						</table>
+						<table>
+							<div id="txtHint"></div>
 
+						</table>
 
 					</div>
 				</div>

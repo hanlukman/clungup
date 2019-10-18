@@ -37,10 +37,10 @@
 								<td>Tgl. Masuk</td>
 								<td><?= format_tgl($_SESSION['booking_date_start']) ?> - <b><?= $total ?> orang sudah mendaftar</b></td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td>Tgl. Keluar</td>
 								<td><?= format_tgl($_SESSION['booking_date_end']) ?></td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td>Jam Datang</td>
 								<td><?= $_SESSION['time_of_arrival'] ?> WIB</td>
