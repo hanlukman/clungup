@@ -12,13 +12,14 @@
 				<div class="col-md-12 wow fadeInLeft">
 					<h4>Form Pemesanan</h4>
 
-					<form action="<?= base_url("booking/confirm") ?>" method="POST"
-						class="contact-form form-horizontal">
+					<form action="<?= base_url("booking/confirm") ?>" method="POST" class="contact-form form-horizontal"
+						novalidate>
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="nama">Nama Koordinator</label>
 							<div class="col-sm-10">
-								<input type="text" name="name" class="form-control" id="nama"
+								<input type="text" name="name" class="form-control" id="name"
 									placeholder="Masukan nama anda">
+								<?= form_error('name', '<div class="invalid-feedback>', '</div>'); ?>
 							</div>
 						</div>
 						<div class="form-group">
@@ -26,6 +27,7 @@
 							<div class="col-sm-10">
 								<input type="email" name="email" class="form-control" id="email"
 									placeholder="Masukan email anda">
+								<?= form_error('email', '<div class="invalid-feedback>', '</div>'); ?>
 							</div>
 						</div>
 						<div class="form-group">
@@ -38,15 +40,15 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="rekening">No. Rekening Anda</label>
 							<div class="col-sm-10">
-								<input type="text" name="no_rekening" class="form-control" id="rekening"
+								<input type="text" name="rekening" class="form-control" id="rekening"
 									placeholder="Masukan nomor rekening anda">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="kota">Kota</label>
+							<label class="control-label col-sm-2" for="alamat">Alamat</label>
 							<div class="col-sm-10">
-								<input type="text" name="kota" class="form-control" id="kota"
-									placeholder="Masukan kota anda">
+								<input type="text" name="alamat" class="form-control" id="alamat"
+									placeholder="Masukan alamat anda">
 							</div>
 						</div>
 						<!-- <div>
@@ -61,17 +63,19 @@
 					                </div> -->
 
 
-					                <!-- Garapan anyar -->
+						<!-- Garapan anyar -->
 						<div class="form-group">
 							<label class="control-label col-sm-2" for="datestart">Tgl. Masuk</label>
 							<div class="col-sm-10">
-								<input type="date" name="datestart" class="form-control datepicker" id="datestart" readonly value="<?php echo date("Y-m-d",$data_tanggal) ?>">
+								<input type="date" name="datestart" class="form-control datepicker" id="datestart"
+									readonly value="<?php echo date("Y-m-d",$data_tanggal) ?>">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2" for="datestart">Sesi</label>
+							<label class="control-label col-sm-2" for="sesi">Sesi</label>
 							<div class="col-sm-10">
-								<input type="text" name="sesi" class="form-control" readonly value="<?php echo $data_sesi ?>">
+								<input type="text" name="sesi" class="form-control" id="sesi" readonly
+									value="<?php echo $data_sesi ?>">
 							</div>
 						</div>
 						<!-- <div class="form-group">

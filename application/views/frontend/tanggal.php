@@ -20,30 +20,31 @@
 										<div class="form-group row">
 											<label class="col-sm-2 control-label">Month</label>
 											<div class="col-sm-10">
-													<select class="form-control" name="mymonth" id="mymonth"
-														onchange="show_date()">
-														<option value>-</option>
-														<option value="01">January</option>
-														<option value="02">February</option>
-														<option value="03">March</option>
-														<option value="04">April</option>
-														<option value="05">May</option>
-														<option value="06">June</option>
-														<option value="07">July</option>
-														<option value="08">August</option>
-														<option value="09">September</option>
-														<option value="10">October</option>
-														<option value="11">November</option>
-														<option value="12">Desember</option>
-													</select>
+												<select class="form-control" name="mymonth" id="mymonth"
+													onchange="show_date()">
+													<option value>-</option>
+													<option value="01">January</option>
+													<option value="02">February</option>
+													<option value="03">March</option>
+													<option value="04">April</option>
+													<option value="05">May</option>
+													<option value="06">June</option>
+													<option value="07">July</option>
+													<option value="08">August</option>
+													<option value="09">September</option>
+													<option value="10">October</option>
+													<option value="11">November</option>
+													<option value="12">Desember</option>
+												</select>
 											</div>
-												</div>
+										</div>
 										<div class="form-group row">
-											<label class="col-sm-2 control-label">Month</label>
+											<label class="col-sm-2 control-label">Year</label>
 											<div class="col-sm-10">
-														<input type="number" id="myyear" class="form-control" value="<?php echo date("Y") ?>" onchange="show_date()">
+												<input type="number" id="myyear" class="form-control"
+													value="<?php echo date("Y") ?>" onchange="show_date()">
 											</div>
-												</div>
+										</div>
 									</div>
 									<!-- year -->
 									<!-- <div class="box-body">

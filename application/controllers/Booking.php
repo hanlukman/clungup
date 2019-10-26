@@ -5,11 +5,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Booking extends CI_Controller
 {
 
-  public function index($tanggal,$sesi)
+  public function index($tanggal, $sesi)
   {
     $data["header"] = $this->load->view("frontend/template/header", null, true);
     $data["footer"] = $this->load->view("frontend/template/footer", null, true);
-    
+
     $data['data_tanggal'] = $tanggal;
     $data['data_sesi'] = $sesi;
 
@@ -24,40 +24,40 @@ class Booking extends CI_Controller
 
     $data["header"] = $this->load->view("frontend/template/header", null, true);
     $data["footer"] = $this->load->view("frontend/template/footer", null, true);
-    
+
     $this->load->view('frontend/tanggal', $data);
   }
 
-  public function get_tanggal($month,$year)
+  public function get_tanggal($month, $year)
   {
     $selectedMonth = $month;
     $bulan = "$selectedMonth";
 
-    $start_date = "01-" . $bulan . "-".$year;
+    $start_date = "01-" . $bulan . "-" . $year;
     $start_time = strtotime($start_date);
 
     $end_time = strtotime("+1 month", $start_time);
     //edit at here
     echo "<table class='table table-bordered'>";
-    for ($i = $start_time; $i < $end_time; $i += 86400) { 
+    for ($i = $start_time; $i < $end_time; $i += 86400) {
       $list = date('d M Y (D)', $i);
 
       #
       $quantity_1 = 0;
       $quantity_2 = 0;
       $quantity_3 = 0;
-      $data_reservasi_1  = $this->db->select('sum(quantity) as total_sum')->where('sesi','1')->where('booking_date_start',date("Y-m-d",$i))->get('reservation')->row(0);
-      $data_reservasi_2  = $this->db->select('sum(quantity) as total_sum')->where('sesi','2')->where('booking_date_start',date("Y-m-d",$i))->get('reservation')->row(0);
-      $data_reservasi_3  = $this->db->select('sum(quantity) as total_sum')->where('sesi','3')->where('booking_date_start',date("Y-m-d",$i))->get('reservation')->row(0);
-      if($data_reservasi_1 != null){
+      $data_reservasi_1  = $this->db->select('sum(quantity) as total_sum')->where('sesi', '1')->where('booking_date_start', date("Y-m-d", $i))->get('reservation')->row(0);
+      $data_reservasi_2  = $this->db->select('sum(quantity) as total_sum')->where('sesi', '2')->where('booking_date_start', date("Y-m-d", $i))->get('reservation')->row(0);
+      $data_reservasi_3  = $this->db->select('sum(quantity) as total_sum')->where('sesi', '3')->where('booking_date_start', date("Y-m-d", $i))->get('reservation')->row(0);
+      if ($data_reservasi_1 != null) {
         $quantity_1 = 10 - $data_reservasi_1->total_sum;
-       }
-      if($data_reservasi_2 != null){
+      }
+      if ($data_reservasi_2 != null) {
         $quantity_2 = 10 - $data_reservasi_2->total_sum;
-       }
-      if($data_reservasi_3 != null){
+      }
+      if ($data_reservasi_3 != null) {
         $quantity_3 = 10 - $data_reservasi_3->total_sum;
-       }
+      }
 
       #
 
@@ -66,16 +66,15 @@ class Booking extends CI_Controller
       echo $list;
       echo "</td>";
       echo "<td>";
-      echo '<a href="'.base_url("Booking/index/".$i."/1").'" class="btn btn-primary">'.$quantity_1.'</a>';
+      echo '<a href="' . base_url("Booking/index/" . $i . "/1") . '" class="btn btn-primary">' . $quantity_1 . '</a>';
       echo "</td>";
       echo "<td>";
-      echo '<a href="'.base_url("Booking/index/".$i."/2").'" class="btn btn-primary">'.$quantity_2.'</a>';
+      echo '<a href="' . base_url("Booking/index/" . $i . "/2") . '" class="btn btn-primary">' . $quantity_2 . '</a>';
       echo "</td>";
       echo "<td>";
-      echo '<a href="'.base_url("Booking/index/".$i."/3").'" class="btn btn-primary">'.$quantity_3.'</a>';
+      echo '<a href="' . base_url("Booking/index/" . $i . "/3") . '" class="btn btn-primary">' . $quantity_3 . '</a>';
       echo "</td>";
       echo "</tr>";
-
     }
     echo "</table>";
   }
@@ -97,19 +96,44 @@ class Booking extends CI_Controller
     // echo $total;
 
     // save to session
-    $_SESSION['name'] = $this->input->post('name');
-    $_SESSION['email'] = $this->input->post('email');
-    $_SESSION['contact'] = $this->input->post('contact');
-    $_SESSION['no_rekening'] = $this->input->post('no_rekening');
-    $_SESSION['kota'] = $this->input->post('kota');
-    $_SESSION['booking_date_start'] = $this->input->post('datestart');
-    $_SESSION['booking_date_end'] = $this->input->post('dateend');
-    $_SESSION['quantity'] = $this->input->post('qty');
-    $_SESSION['payment'] = (abs(explode("-", $_SESSION['booking_date_start'])[2] - explode("-", $_SESSION['booking_date_end'])[2]) + 1) * 10000 * $_SESSION['quantity'];
-    $_SESSION['time_of_arrival'] = $this->input->post('time');
+    // $_SESSION['name'] = $this->input->post('name');
+    // $_SESSION['email'] = $this->input->post('email');
+    // $_SESSION['contact'] = $this->input->post('contact');
+    // $_SESSION['no_rekening'] = $this->input->post('rekening');
+    // $_SESSION['alamat'] = $this->input->post('alamat');
+    // $_SESSION['quantity'] = $this->input->post('qty');
+    // $_SESSION['booking_code'] = substr(md5(date("Y-m-d h:i:s")), 0, 5);
+    // $_SESSION['booking_date_start'] = $this->input->post('datestart');
+    // $_SESSION['booking_date_end'] = $this->input->post('datestart');
+    // $_SESSION['payment'] = (abs(explode("-", $_SESSION['booking_date_start'])[2] - explode("-", $_SESSION['booking_date_end'])[2]) + 1) * 10000 * $_SESSION['quantity'];
+    // $_SESSION['time'] = $this->input->post('time');
+    // $_SESSION['sesi'] = $this->input->post('sesi');
+    // $_SESSION['time_of_arrival'] = $this->input->post('time');
     // $_SESSION['booking_code'] =explode("-",$_SESSION['booking_date_start'])[0].explode("-",$_SESSION['booking_date_start'])[1].explode("-",$_SESSION['booking_date_start'])[2].$_SESSION['name'];
-    $_SESSION['booking_code'] = substr(md5(date("Y-m-d h:i:s")), 0, 5);
-    $_SESSION['confirmed'] = 1;
+    // $_SESSION['booking_code'] = $this->generate_booking_code();
+    // $_SESSION['status'] = 'Belum Bayar';
+    // $_SESSION['confirm'] = 1;
+
+    
+    $data = [
+      'name' => $this->input->post('name'),
+      'email' => $this->input->post('email'),
+      'contact' => $this->input->post('contact'),
+      'no_rekening' => $this->input->post('rekening'),
+      'alamat' => $this->input->post('alamat'),
+      'quantity' => $this->input->post('qty'),
+      'booking_code' => $this->input->post('booking_code'),
+      'booking_date_start' => $this->input->post('datestart'),
+      'booking_date_end' => $this->input->post('datestart'),
+      'payment' => (abs(explode("-", $this->input->post('datestart'))[2] - explode("-", $this->input->post('datestart'))[2]) + 1) * 10000 * $this->input->post('qty'),
+      'time' => $this->input->post('time'),
+      'sesi' => $this->input->post('sesi'),
+      'booking_code' => $this->generate_booking_code(),
+      'status' => 'Belum Bayar',
+    ];
+    
+    $this->session->set_userdata($data);
+    
 
     $data["total"] = $total;
 
@@ -118,38 +142,55 @@ class Booking extends CI_Controller
     $this->load->view('frontend/confirm', $data);
   }
 
+  public function generate_booking_code()
+  {
+    $chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    return substr(str_shuffle($chars), 0, 5);
+  }
+
 
 
   public function post()
   {
     // $this->load->view('Form_Booking');
-    if ($_SESSION['confirmed'] == 1) {
-      $data['name'] = $_SESSION['name'];
-      $data['email'] = $_SESSION['email'];
-      $data['contact'] = $_SESSION['contact'];
-      $data['no_rekening'] = $_SESSION['no_rekening'];
-      // $value['negara'] = $this->input->post('negara');
-      $data['kota'] = $_SESSION['kota'];
-      $data['booking_date_start'] = $_SESSION['booking_date_start'];
-      $data['booking_date_end'] = $_SESSION['booking_date_end'];
-      $data['quantity'] = $_SESSION['quantity'];
-      $data['payment'] = $_SESSION['payment'];
-      $data['time_of_arrival'] = $_SESSION['time_of_arrival'];
-      $data['booking_code'] = $_SESSION['booking_code'];
-      $data['booking_date'] = date('Y-m-d');
+      // $data['name'] = $_SESSION['name'];
+      // $data['email'] = $_SESSION['email'];
+      // $data['contact'] = $_SESSION['contact'];
+      // $data['no_rekening'] = $_SESSION['no_rekening'];
+      // // $value['negara'] = $this->input->post('negara');
+      // $data['alamat'] = $_SESSION['alamat'];
+      // $data['quantity'] = $_SESSION['quantity'];
+      // $data['booking_date_start'] = $_SESSION['booking_date_start'];
+      // $data['booking_date_end'] = $_SESSION['booking_date_end'];
+      // $data['payment'] = $_SESSION['payment'];
+      // $data['time_of_arrival'] = $_SESSION['time_of_arrival'];
+      // $data['booking_code'] = $_SESSION['booking_code'];
+      // $data['booking_date'] = date('Y-m-d');
       // $data['booking_date'] =  date('Y-m-d', strtotime($data['booking_date_start']."+02 days"));
+      $data = [
+        'name' => $this->input->post('name'),
+        'email' => $this->input->post('email'),
+        'contact' => $this->input->post('contact'),
+        'no_rekening' => $this->input->post('no_rekening'),
+        'alamat' => $this->input->post('alamat'),
+        'quantity' => $this->input->post('quantity'),
+        'booking_code' => $this->input->post('booking_code'),
+        'payment' => $this->input->post('payment'),
+        'booking_date_start' => $this->input->post('date'),
+        'time_of_arrival' => $this->input->post('time'),
+        'sesi' => $this->input->post('sesi'),
+        'status' => 'Belum Bayar'
+      ];
 
       $this->db->insert('reservation', $data);
+      
 
-      $this->send($data, $this->load->view("frontend/email_confirmation", $data, TRUE));
+      // $this->send($data, $this->load->view("frontend/email_confirmation", $data, TRUE));
       session_destroy();
 
       $data["header"] = $this->load->view("frontend/template/header", null, true);
       $data["footer"] = $this->load->view("frontend/template/footer", null, true);
-      $this->load->view('frontend/booked', $data);
-    } else {
-      redirect("booking/index");
-    }
+      $this->load->view('frontend/home', $data);
   }
 
 
