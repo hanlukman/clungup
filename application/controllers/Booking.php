@@ -66,13 +66,13 @@ class Booking extends CI_Controller
       echo $list;
       echo "</td>";
       echo "<td>";
-      echo '<a href="' . base_url("Booking/index/" . $i . "/1") . '" class="btn btn-primary">' . $quantity_1 . '</a>';
+      echo '<a href="' . base_url("Booking/index/" . $i . "/1") . '" class="text-danger">' . $quantity_1 . '</a>';
       echo "</td>";
       echo "<td>";
-      echo '<a href="' . base_url("Booking/index/" . $i . "/2") . '" class="btn btn-primary">' . $quantity_2 . '</a>';
+      echo '<a href="' . base_url("Booking/index/" . $i . "/2") . '" class="text-danger">' . $quantity_2 . '</a>';
       echo "</td>";
       echo "<td>";
-      echo '<a href="' . base_url("Booking/index/" . $i . "/3") . '" class="btn btn-primary">' . $quantity_3 . '</a>';
+      echo '<a href="' . base_url("Booking/index/" . $i . "/3") . '" class="text-danger">' . $quantity_3 . '</a>';
       echo "</td>";
       echo "</tr>";
     }
