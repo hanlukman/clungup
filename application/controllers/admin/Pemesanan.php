@@ -45,7 +45,7 @@ class Pemesanan extends CI_Controller {
 
 
 	      //$this->send($data, $this->load->view("frontend/email_confirmation",$data,TRUE));
-	      $this->send($data, $this->load->view("admin/email_confirmed",$data,TRUE));
+	    //   $this->send($data, $this->load->view("admin/email_confirmed",$data,TRUE));
 	      redirect("admin/pemesanan");
 	    }    
 
