@@ -50,7 +50,7 @@
                                                 <td><b>Cetak</b></td>
                                                 <?php if($pesan['status'] == 'Belum Bayar') : ?>
                                                 <td>
-                                                    <button class="btn btn-success" disabled>Kirim Email</button>
+                                                    <button class="btn btn-success" disabled>Cetak Bukti</button>
                                                 </td>
                                                 <?php else: ?>
                                                 <td>
